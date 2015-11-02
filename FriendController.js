@@ -1,5 +1,8 @@
 var app = angular.module('FModule').controller('FCtrl', function($scope) {
 
+
+
+
 	$scope.friends = [
   {
     "name": "Preston McNeil",
@@ -433,6 +436,19 @@ var app = angular.module('FModule').controller('FCtrl', function($scope) {
   }
 ];
 
+	$scope.sorter;
+	// $scope.name = 'name';
+	// $scope.count = 'friend_count';
+	// $scope.city = 'location.city';
+	// $scope.state = 'location.state';
+	// $scope.country = 'location.country';
+	//var sorter;
+	$scope.reverse = true;
+
+	$scope.order = function(sorter) {
+        $scope.reverse = ($scope.sorter === sorter) ? !$scope.reverse : false;
+        $scope.sorter = sorter;
+      };
 
 });
 

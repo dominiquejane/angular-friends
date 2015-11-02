@@ -19,15 +19,15 @@
         <input class="form-control" placeholder="Search Name" ng-model="searchName">
         <input class="form-control" placeholder="Search Location" ng-model="searchLocation">
 
-        <select class="input-medium">
-          <option value="name">Name</option>
+        <select class="input-medium" ng-model="sorter">
+          <option value="name" >Name</option>
           <option value="friend_count">#Friends</option>
-          <optionvalue="location.city">City</option>
-          <option value="location.state">State</option>
-          <option value="location.country">Country</option>
+          <option value="current_location.city">City</option>
+          <option value="current_location.state">State</option>
+          <option value="current_location.country">Country</option>
         </select>
 
-        <select class="input-medium">
+        <select class="input-medium" ng-model="reverse">
           <option value="+">Descending</option>
           <option value="-">Ascending</option>
         </select>
@@ -35,11 +35,11 @@
       </div>
     </form>
 
-    <ul ng-repeat="data in friends | filter: searchName | filter: searchLocation">
+    <ul ng-repeat="data in friends | filter: searchTerm | filter: searchLocation | orderBy: sorter : reverse">
       <li class='friend'>
         <img class="profile-pic" src={{data.pic_square}}>
 
-        <h3>{{data.name}}</h3>
+        <h3 ng-model="name">{{data.name}}</h3>
 
         <div class="location">
           Location: {{data.current_location.city}}, {{data.current_location.state}}, {{data.current_location.country}}
