@@ -443,6 +443,7 @@ var app = angular.module('FModule').controller('FCtrl', function($scope) {
 	// $scope.state = 'location.state';
 	// $scope.country = 'location.country';
 	//var sorter;
+	$scope.searchTerm = {};
 	$scope.reverse = true;
 
 	$scope.order = function(sorter) {

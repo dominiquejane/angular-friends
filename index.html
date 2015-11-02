@@ -16,8 +16,8 @@
     <form class="form-inline searchForm" role="form">
       <div class="form-group">
 
-        <input class="form-control" placeholder="Search Name" ng-model="searchName">
-        <input class="form-control" placeholder="Search Location" ng-model="searchLocation">
+        <input class="form-control" placeholder="Search Name" ng-model="searchTerm.name">
+        <input class="form-control" placeholder="Search Location" ng-model="searchTerm.current_location.$">
 
         <select class="input-medium" ng-model="sorter">
           <option value="name" >Name</option>
@@ -28,14 +28,14 @@
         </select>
 
         <select class="input-medium" ng-model="reverse">
-          <option value="+">Descending</option>
-          <option value="-">Ascending</option>
+          <option value="true">Descending</option>
+          <option value="false">Ascending</option>
         </select>
 
       </div>
     </form>
 
-    <ul ng-repeat="data in friends | filter: searchTerm | filter: searchLocation | orderBy: sorter : reverse">
+    <ul ng-repeat="data in friends | filter: searchTerm | orderBy: sorter : reverse">
       <li class='friend'>
         <img class="profile-pic" src={{data.pic_square}}>
 
