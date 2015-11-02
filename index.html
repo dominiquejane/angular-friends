@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="FModule">
 <head>
   <title>Angular Friends</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
+<body ng-controller="FCtrl">
+
+
 
   <h1>The <strong>facebook</strong> Friend Machine</h1>
 
@@ -14,19 +16,15 @@
     <form class="form-inline searchForm" role="form">
       <div class="form-group">
 
-        <input class="form-control" placeholder="Search Anything About Your Friends">
-        <!-- STEP 5: Get rid of the one above when you uncomment the below-->
-          <!--
-        <input class="form-control" placeholder="Search Name">
-        <input class="form-control" placeholder="Search Location">
-          -->
+        <input class="form-control" placeholder="Search Name" ng-model="searchName">
+        <input class="form-control" placeholder="Search Location" ng-model="searchLocation">
 
         <select class="input-medium">
-          <option>Name</option>
-          <option>#Friends</option>
-          <option>City</option>
-          <option>State</option>
-          <option>Country</option>
+          <option value="name">Name</option>
+          <option value="friend_count">#Friends</option>
+          <optionvalue="location.city">City</option>
+          <option value="location.state">State</option>
+          <option value="location.country">Country</option>
         </select>
 
         <select class="input-medium">
@@ -36,6 +34,26 @@
 
       </div>
     </form>
+
+    <ul ng-repeat="data in friends | filter: searchName | filter: searchLocation">
+      <li class='friend'>
+        <img class="profile-pic" src={{data.pic_square}}>
+
+        <h3>{{data.name}}</h3>
+
+        <div class="location">
+          Location: {{data.current_location.city}}, {{data.current_location.state}}, {{data.current_location.country}}
+        </div>
+
+        <div class="status">
+          Status: {{data.status.message}}<span class="hashtag"></span>
+        </div>
+
+        <div class="num-friends">
+          Friends: {{data.friend_count}}
+        </div>
+      </li>
+    </ul>
 
     <ul>
       <li class='friend'>
