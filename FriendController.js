@@ -1,6 +1,32 @@
 var app = angular.module('FModule').controller('FCtrl', function($scope) {
 
 
+	$scope.searchOption=[
+		{label: 'Name' , value: 'name' ,},
+		{label: "#Friends" , value: 'friend_count' ,},
+		{label: 'City' , value: 'current_location.city',},
+		{label: 'State', value: 'current_location.state',},
+		{label: 'Country', value: 'current_location.country',},
+
+	];
+
+	// $scope.friends.map(function(friendObj) {
+	// 	if(!friendObj.current_location) {
+	// 		friendObj.current_location = {
+	// 			"city": "",
+ //      "state": "",
+ //      "country": "",
+ //      "zip": "",
+ //      "latitude": "",
+ //      "longitude": "",
+ //      "id": "",
+ //      "name": ""
+
+	// // 		};
+	// 	}
+	// });
+
+
 
 
 	$scope.friends = [
@@ -436,7 +462,6 @@ var app = angular.module('FModule').controller('FCtrl', function($scope) {
   }
 ];
 
-	$scope.sorter;
 	// $scope.name = 'name';
 	// $scope.count = 'friend_count';
 	// $scope.city = 'location.city';
@@ -444,12 +469,11 @@ var app = angular.module('FModule').controller('FCtrl', function($scope) {
 	// $scope.country = 'location.country';
 	//var sorter;
 	$scope.searchTerm = {};
-	$scope.reverse = true;
 
-	$scope.order = function(sorter) {
-        $scope.reverse = ($scope.sorter === sorter) ? !$scope.reverse : false;
-        $scope.sorter = sorter;
-      };
+	// $scope.order = function(sorter) {
+ //        $scope.reverse = ($scope.sorter === sorter) ? !$scope.reverse : false;
+ //        $scope.sorter = sorter;
+ //      };
 
 });
 

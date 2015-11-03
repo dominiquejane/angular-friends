@@ -18,31 +18,39 @@
 
         <input class="form-control" placeholder="Search Name" ng-model="searchTerm.name">
         <input class="form-control" placeholder="Search Location" ng-model="searchTerm.current_location.$">
+        <!-- Declare an empty searchTerm object(optional). Each ng-model will represent a key in the object. This way there are not two filters. If there are two filters one will return a value, but the other will return undefined. But having it search through an object only requires one filter. -->
 
-        <select class="input-medium" ng-model="sorter">
+       <!--  <select class="input-medium" ng-model="sorter">
           <option value="name" >Name</option>
           <option value="friend_count">#Friends</option>
           <option value="current_location.city">City</option>
           <option value="current_location.state">State</option>
           <option value="current_location.country">Country</option>
+        </select> -->
+
+        <!-- <select class="input-medium" ng-model="sorter" ng-options="option.label for option in searchOption track by option.value"> -->
+        <select class="input-medium" ng-model="sorter" ng-options="option.value as option.label for option in searchOption">
+          <option value="">Refine Search</option>
         </select>
 
         <select class="input-medium" ng-model="reverse">
-          <option value="true">Descending</option>
-          <option value="false">Ascending</option>
+          <option value="1">Descending</option>
+          <option value="">Ascending</option>
+          <!-- values are dependent on truthy/falsey values -->
         </select>
 
       </div>
     </form>
 
-    <ul ng-repeat="data in friends | filter: searchTerm | orderBy: sorter : reverse">
+    <ul ng-repeat="data in friends|filter:searchTerm|orderBy:sorter:reverse">
+      <!-- "orderBy: reverse + sorter" this places a +/- in front of the objects you're sorting and angular knows that this is a way to sort, so use +/- in the values of the descending/ascending options above -->
       <li class='friend'>
-        <img class="profile-pic" src={{data.pic_square}}>
+        <img class="profile-pic" ng-src={{data.pic_square}}>
 
         <h3 ng-model="name">{{data.name}}</h3>
 
-        <div class="location">
-          Location: {{data.current_location.city}}, {{data.current_location.state}}, {{data.current_location.country}}
+        <div class="location" ng-show="data.current_location"> <!-- ng-show will display if there its value is available, so for the objects that don't have anything under current_location, it will not show this div, ergo, no random commas -->
+          Location: {{data.current_location.name}}, {{data.current_location.country}}
         </div>
 
         <div class="status">
